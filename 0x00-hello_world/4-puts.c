@@ -1,9 +1,12 @@
 #include <stdio.h>
-/* this is the input command */
+/**
+ * main - this is the function command
+ *
+ * Return: value is constant 0
+ */
+
 int main(void)
 {
-/* this is the input function */
 	puts("Programming is like building a multilingual puzzle\n");
-/* prints the function followed by a new line */
 	return (0);
 }
