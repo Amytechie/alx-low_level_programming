@@ -1,5 +1,7 @@
 #include "main.h"
 /**
+ * main - this is the main function
+ *
  * _putchar - it prints the char putchar
  *
  * Return: return value is 0
