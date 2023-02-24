@@ -10,4 +10,5 @@ void print_square(int size);
 void print_triangle(int size);
 int _isupper(int c);
 int _isdigit(int c);
+int mul(int a, int b);
 #endif
