@@ -1,37 +1,37 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
-/**
- * append_text_to_file - appends text to file
- * @filename: char string
- * @text_content: char string
- * Return: the return value
- */
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
+#include <stdio.h>
+
+/**
+ * append_text_to_file - append text to the end of a file
+ * @filename: name of file to write into.
+ * @text_content: text to append to file
+ *
+ * Return: 1 (SUCCESS), else -1 (FAILURE)
+ */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	FILE *file = fopen(filename, "a");
-	size_t len = strlen(text_content);
-	size_t written = fwrite(text_content, sizeof(char), len, file);
+	int fd, err, len;
 
-	if (filename == NULL)
-	{
+	fd = err = len = 0;
+	if (!filename)
 		return (-1);
-	}
-
-	if (text_content == NULL)
-	{
-		return (access(filename, F_OK == 0 ? 1 : -1));
-	}
-
-	if (file == NULL)
-	{
+	else if (!text_content || !text_content[0])
+		return (1);
+	fd = open(filename, O_WRONLY | O_APPEND);
+	if (fd < 0)
 		return (-1);
-	}
-
-	fclose(file);
-
-	return (written == len ? 1 : -1);
+	while (text_content[len])
+		len++;
+	err = write(fd, text_content, len);
+	if (err < 0)
+		return (-1);
+	close(fd);
+	return (1);
 }
+
+
